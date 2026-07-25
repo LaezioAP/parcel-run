@@ -4,8 +4,9 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField]
     private float speed;
-
     private Rigidbody2D _rig;
+
+    [SerializeField] private float lifeTime = 3f;
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class Projectile : MonoBehaviour
     private void Start()
     {
         _rig.linearVelocity = Vector2.up * speed;
+        Destroy(gameObject, lifeTime);
     }
 
     private void Update()
