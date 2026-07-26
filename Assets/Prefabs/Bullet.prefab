@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7568282968795268102}
   - component: {fileID: 6648805948156321444}
   - component: {fileID: -2374387093449111824}
+  - component: {fileID: -2725817164436482981}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -170,3 +171,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   speed: 10
+  lifeTime: 3
+--- !u!114 &-2725817164436482981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083973630871798481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85479468aa9d89a429bcedd21531355c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileVisibility
+  margin: 0.05

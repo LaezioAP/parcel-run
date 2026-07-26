@@ -1,19 +1,21 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float movementSpeed;
+    [Header("Movement")]
+    [SerializeField] private float movementSpeed = 5f;
+    [SerializeField] private ScrollController scrollController;
+
+    [Header("Shooting")]
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private float fireRate = 0.2f;
+
     private Rigidbody2D _rigidbody;
     private Vector2 _movementInput;
 
-
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Transform firePoint;
-
-    [SerializeField] private float fireRate = 0.2f;
     private bool isFiring;
     private float nextFireTime;
 
@@ -27,14 +29,18 @@ public class PlayerMovement : MonoBehaviour
         _movementInput = value.Get<Vector2>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        _rigidbody.linearVelocity = _movementInput * movementSpeed;
+        Vector2 playerMovement = _movementInput * movementSpeed;
+        Vector2 scrollMovement = Vector2.up * scrollController.Speed;
+
+        _rigidbody.linearVelocity = playerMovement + scrollMovement;
     }
 
-    public void Update()
+    private void Update()
     {
-        if (!isFiring) return;
+        if (!isFiring)
+            return;
 
         if (Time.time >= nextFireTime)
         {
@@ -43,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnFire(InputValue value)
+    public void OnFire(InputValue value)
     {
         isFiring = value.isPressed;
     }
