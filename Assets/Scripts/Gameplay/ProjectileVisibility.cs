@@ -21,7 +21,7 @@ public class ProjectileVisibility : MonoBehaviour
             viewportPosition.x < -margin ||
             viewportPosition.x > 1f + margin ||
             viewportPosition.y < -margin ||
-            viewportPosition.y > 1f + margin;
+            viewportPosition.y > 1f;
 
         if (isOutsideCamera)
         {

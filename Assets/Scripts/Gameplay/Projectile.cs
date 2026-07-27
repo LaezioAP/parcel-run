@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField]
-    private float speed;
-    private Rigidbody2D _rig;
-
+    [SerializeField] private float speed;
     [SerializeField] private float lifeTime = 3f;
+    [SerializeField] private int damage = 1;
+    private Rigidbody2D _rig;
 
     private void Awake()
     {
@@ -19,8 +18,11 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        if (!other.TryGetComponent(out EnemyHealth enemyHealth)) return;
 
+        enemyHealth.TakeDamage(damage);
+        Destroy(gameObject);
     }
 }
